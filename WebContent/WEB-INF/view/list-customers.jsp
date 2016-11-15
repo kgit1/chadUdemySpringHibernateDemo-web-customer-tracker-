@@ -50,7 +50,15 @@ href="${pageContext.request.contextPath}/resources/css/style.css">
 
 <hr>
 <p>List Customers - coming soon....</p>
-
+<hr>
+<p>You've another instance of Tomcat already running. You can confirm this by</p> 
+<p>going to http://localhost:8080 in your webbrowser and check if you get the</p> 
+<p>Tomcat default home page or a Tomcat-specific 404 error page. Both are</p> 
+<p>equally valid evidence that Tomcat runs fine; if it didn't, then you would</p>
+<p>have gotten a browser specific HTTP connection timeout error message.</p>
+<p></p>
+<p>You need to shutdown it. Go to /bin subfolder of the Tomcat installation</p> 
+<p>folder and execute the shutdown.bat (Windows) or shutdown.sh (Unix) script.</p>
 <hr>
 <img src="${pageContext.request.contextPath}/resources/images/how spring mvc.jpg">
 </div>
