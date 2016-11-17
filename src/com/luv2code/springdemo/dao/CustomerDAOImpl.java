@@ -21,7 +21,9 @@ public class CustomerDAOImpl implements CustomerDAO {
 	private SessionFactory sessionFactory;
 
 	@Override
-	@Transactional
+	// now method called from service layer,
+	// so transactional works from there
+	// @Transactional
 	public List<Customer> getCustomers() {
 
 		// get the current session
@@ -37,5 +39,4 @@ public class CustomerDAOImpl implements CustomerDAO {
 		// return the result
 		return customers;
 	}
-
 }
