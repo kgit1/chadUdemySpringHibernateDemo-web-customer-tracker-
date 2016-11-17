@@ -10,6 +10,8 @@
 href="${pageContext.request.contextPath}/resources/css/main.css">
 <link rel="stylesheet" type="text/css" 
 href="${pageContext.request.contextPath}/resources/css/style.css">
+<link rel="stylesheet" type="text/css" 
+href="${pageContext.request.contextPath}/resources/css/add-customer-style.css">
 <title>List customers</title>
 </head>
 <body>
@@ -23,7 +25,16 @@ href="${pageContext.request.contextPath}/resources/css/style.css">
 </div>
 <div id="container">
 <div id="content">
-<!-- add out html -->
+
+<!-- add new button: Add Customer -->
+
+<input type="button" value="Add Customer" 
+onclick="window.location.href='showFormForAdd';return false" 
+class="add-button"
+/>
+
+
+<!-- add our html table here -->
 <hr>
 	<table>
 	<tr>
