@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.hibernate.query.criteria.internal.expression.SearchedCaseExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,8 +31,10 @@ public class CustomerDAOImpl implements CustomerDAO {
 		Session session = sessionFactory.getCurrentSession();
 
 		// create query
-		Query<Customer> theQuery = session.createQuery("from Customer",
-				Customer.class);
+		// Query<Customer> theQuery = session.createQuery("from Customer",
+		// Customer.class);
+		Query<Customer> theQuery = session
+				.createQuery("from Customer order by lastName", Customer.class);
 
 		// execute query and the result
 		List<Customer> customers = theQuery.getResultList();
@@ -42,10 +45,24 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 	@Override
 	public void saveCustomer(Customer theCustomer) {
-		//get current hibernate session
+		// get current hibernate session
 		Session curentSession = sessionFactory.getCurrentSession();
-		
-		//save the customer
-		curentSession.save(theCustomer);
+
+		// save the customer
+		// curentSession.save(theCustomer);
+
+		// save or update customer
+		curentSession.saveOrUpdate(theCustomer);
+	}
+
+	@Override
+	public Customer getCustomer(int theId) {
+		// get the current session
+		Session session = sessionFactory.getCurrentSession();
+
+		// retrieve/read data from database using the primaryKey
+		Customer theCustomer = session.get(Customer.class, theId);
+
+		return theCustomer;
 	}
 }

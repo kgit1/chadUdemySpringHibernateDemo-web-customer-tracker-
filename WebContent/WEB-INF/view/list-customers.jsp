@@ -41,10 +41,17 @@ class="add-button"
 	<th>First Name</th>
 	<th>Last Name</th>
 	<th>Email Name</th>
+	<th>Action</th>
 	</tr>
 	
 	<!-- items="${customers} <- customers name from MVC model  -->
-		<c:forEach var="tempCustomer" items="${customers}">
+		<c:forEach var="tempCustomer" items="${customers}">		
+		
+			<!-- construct an "update" link with costumer id -->
+			<c:url var="updateLink" value="/customer/showFormForUpdate">
+			<c:param name="customerId" value="${tempCustomer.id}"/>
+			</c:url>
+			
 			<tr>
 			<!-- will call tempCustomer.getFirstName() -->
 			<td>${tempCustomer.firstName}</td>
@@ -52,6 +59,8 @@ class="add-button"
 			<td>${tempCustomer.lastName}</td>
 			<!-- will call tempCustomer.getEmail() -->
 			<td>${tempCustomer.email}</td>
+			<!-- display the update link -->
+			<td><a href="${updateLink}">Update</a></td>
 			</tr>		
 		</c:forEach>		
 	</table>

@@ -28,7 +28,13 @@ href="${pageContext.request.contextPath}/resources/css/add-customer-style.css">
 <div id="container">
 <h3>Save Customer</h3>
 
+<!-- on form load - spring will execute getters to populate fields -->
+<!-- on form submit - spring will use setters to change field's values -->
 <form:form action="saveCustomer" modelAttribute="customer" method="POST">
+
+	<!-- need to associate this data with customer id -->
+	<form:hidden path="id"/>
+	
 	<table>	
 		<tbody>
 		<tr>

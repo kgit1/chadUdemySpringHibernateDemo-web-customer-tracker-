@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.luv2code.springdemo.entity.Customer;
 import com.luv2code.springdemo.service.CustomerService;
@@ -73,12 +74,34 @@ public class CustomerController {
 	// <form:form action="saveCustomer" modelAttribute="customer" method="POST">
 	// so in mapping use name of action "saveCustomer"
 	// in modelAttribute - modelAttribute
+	
 	@PostMapping("/saveCustomer")
 	public String saveCustomer(
 			@ModelAttribute("customer") Customer theCustomer) {
 		//save the customer using our Service
 		customerService.saveCustomer(theCustomer);		
 		return "redirect:/customer/list";
+	}
+	
+	//new code for Update Customer button
+	//<c:url var="updateLink" value="/customer/showFormForUpdate">
+	//<c:param name="customerId" value="${tempCostumer.id}"/>
+	//</c:url>
+	//<!-- display the update link -->
+	//<td><a href="${updateLink}">Update</a></td>
+	
+	@GetMapping("/showFormForUpdate")
+	public String showFormForUpdate(
+			@RequestParam("customerId") int theId, 
+			Model theModel){
+		//get the customer from database
+		Customer theCustomer = customerService.getCustomer(theId);
+		
+		//set customer as a model attribute to pre-populate the form
+		theModel.addAttribute("customer", theCustomer);
+		
+		//send over to our form
+		return "customer-form";
 	}
 
 }
