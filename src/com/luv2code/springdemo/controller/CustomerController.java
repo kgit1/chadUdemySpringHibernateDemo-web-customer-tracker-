@@ -74,34 +74,50 @@ public class CustomerController {
 	// <form:form action="saveCustomer" modelAttribute="customer" method="POST">
 	// so in mapping use name of action "saveCustomer"
 	// in modelAttribute - modelAttribute
-	
+
 	@PostMapping("/saveCustomer")
 	public String saveCustomer(
 			@ModelAttribute("customer") Customer theCustomer) {
-		//save the customer using our Service
-		customerService.saveCustomer(theCustomer);		
+		// save the customer using our Service
+		customerService.saveCustomer(theCustomer);
 		return "redirect:/customer/list";
 	}
-	
-	//new code for Update Customer button
-	//<c:url var="updateLink" value="/customer/showFormForUpdate">
-	//<c:param name="customerId" value="${tempCostumer.id}"/>
-	//</c:url>
-	//<!-- display the update link -->
-	//<td><a href="${updateLink}">Update</a></td>
-	
+
+	// new code for Update Customer button
+	// <c:url var="updateLink" value="/customer/showFormForUpdate">
+	// <c:param name="customerId" value="${tempCostumer.id}"/>
+	// </c:url>
+	// <!-- display the update link -->
+	// <td><a href="${updateLink}">Update</a></td>
+
 	@GetMapping("/showFormForUpdate")
-	public String showFormForUpdate(
-			@RequestParam("customerId") int theId, 
-			Model theModel){
-		//get the customer from database
+	public String showFormForUpdate(@RequestParam("customerId") int theId,
+			Model theModel) {
+		// get the customer from database
 		Customer theCustomer = customerService.getCustomer(theId);
-		
-		//set customer as a model attribute to pre-populate the form
+
+		// set customer as a model attribute to pre-populate the form
 		theModel.addAttribute("customer", theCustomer);
-		
-		//send over to our form
+
+		// send over to our form
 		return "customer-form";
+	}
+
+	// new code for Delete Customer button
+	// <!-- construct a "delete" link with customer id -->
+	// <c:url var="delete" value="/customer/delete">
+	// <c:param name="customerId" value="${tempCustomer.id}"/>
+	// </c:url>
+	// <a href="${delete}"
+	// onclick="if(!(confirm('Are you sure you want to delete this customer?')))
+	// return false"
+	// >Delete</a>
+	
+	@GetMapping("/delete")
+	public String deleteCustomer(@RequestParam("customerId") int theId){
+		//delete customer
+		customerService.deleteCustomer(theId);
+		return "redirect:/customer/list";
 	}
 
 }
