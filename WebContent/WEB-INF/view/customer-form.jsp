@@ -58,7 +58,7 @@ href="${pageContext.request.contextPath}/resources/css/add-customer-style.css">
 </form:form>
 
 
-<div stlye="clear; both;"></div>
+<div style="clear; both;"></div>
 <p><a href="${pageContext.request.contextPath}/customer/list">Back To List</a></p>
 
 
