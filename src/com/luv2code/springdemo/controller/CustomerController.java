@@ -62,7 +62,6 @@ public class CustomerController {
 	}
 
 	// new code for ADD Customer button
-
 	@GetMapping("/showFormForAdd")
 	public String showFormForAdd(Model theModel) {
 		Customer theCustomer = new Customer();
